@@ -42,11 +42,14 @@ jobs:
       # （顺带充当保活提交，防止仓库 60 天无提交被停用定时任务）
       - name: 提交音频
         run: |
+          mkdir -p audio
           date -u +"last run: %Y-%m-%d %H:%M UTC" > last_run.txt
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A audio last_run.txt
           git commit -m "day audio + keepalive" || exit 0
+          # 远端可能已被其他运行改动，先 rebase 再推
+          git pull --rebase origin main || true
           git push
 
       # 第 3 步：音频已在线，再推微信

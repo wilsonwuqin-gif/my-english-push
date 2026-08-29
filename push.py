@@ -21,7 +21,7 @@ import urllib.error
 START_DATE    = datetime.date(2026, 9, 1)  # 学习起始日，改成你真正开始的那天
 WORDS_PER_DAY = 3                          # 每天新词数量
 REVIEW_DAYS   = 3                          # 复习前几天的词
-MAX_TOKENS    = 2000
+MAX_TOKENS    = 3000
 
 # ---- 音频朗读 ----
 ENABLE_AUDIO    = True
@@ -80,7 +80,9 @@ def build_prompt(todays, reviews):
 今天的 {len(todays)} 个新词：{todays}
 需要复习的词：{reviews}
 
-请生成今日学习卡片，严格按以下格式，总字数控制在 500 字以内：
+请生成今日学习卡片，严格按以下格式。
+前四节（卡片正文）控制在 500 字以内；
+第五节【朗读稿】不计入这个字数，必须完整输出，不可省略：
 
 【今日 {len(todays)} 词】
 逐个给出：单词 / 音标 / 中文 / 一个来自智慧建筑或新加坡医院项目的真实工作例句（中英对照）
@@ -163,8 +165,13 @@ def split_script(card):
 
 def make_audio(script, day_n):
     """用 edge-tts 生成 mp3，返回文件相对路径；失败返回 None（不影响文字推送）"""
-    if not (ENABLE_AUDIO and script):
+    if not ENABLE_AUDIO:
+        print("[音频] ENABLE_AUDIO 为 False，跳过")
         return None
+    if not script:
+        print("[音频] AI 未输出【朗读稿】一节，无内容可朗读，跳过")
+        return None
+    print(f"[音频] 朗读稿 {len(script)} 字，开始合成…")
     try:
         import edge_tts
     except ImportError:
@@ -204,11 +211,16 @@ def audio_url(path):
 
 
 def push_wechat(title, content, token):
+    # AI 输出的是 Markdown。markdown 模板能正确渲染 **加粗** 和链接；
+    # 如果微信里显示效果不理想，设环境变量 PUSH_TEMPLATE=html
+    template = os.environ.get("PUSH_TEMPLATE", "markdown")
+    if template == "html":
+        content = content.replace("\n", "<br>")
     payload = json.dumps({
         "token": token,
         "title": title,
-        "content": content.replace("\n", "<br>"),
-        "template": "html",
+        "content": content,
+        "template": template,
     }).encode("utf-8")
     req = urllib.request.Request(
         "https://www.pushplus.plus/send",
