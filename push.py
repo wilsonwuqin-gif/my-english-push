@@ -264,19 +264,45 @@ def audio_url(path):
 
 
 # ---------------- 排版样式（改这里就能调颜色字号） ----------------
-CSS = {
-    "head":   "font-size:17px;font-weight:700;color:#000;margin:22px 0 10px",
-    "word":   "font-size:17px;font-weight:700;color:#C00000",   # 单词：深红加粗
-    "phon":   "font-size:15px;color:#000",                      # 音标：黑色常规
-    "wzh":    "font-size:16px;font-weight:700;color:#000",      # 词义：黑色加粗
-    "en":     "font-size:15px;color:#000",                      # 例句英文
-    "zh":     "font-size:15px;color:#000",                      # 中文
-    "topic":  "font-size:15px;color:#000",                      # 场景名
-    "dlg":    "font-size:15px;font-weight:700;color:#1F6FC4",   # 对话英文：蓝色加粗
-    "spk":    "font-size:15px;color:#000",                      # 说话人 A: B:
-    "key":    "font-size:15px;font-weight:700;color:#8C4B10",   # 今日一句：棕色加粗
-    "note":   "font-size:15px;color:#000",                      # 使用场景等
+# 原则：普通文字不指定颜色，继承页面本身的文字色，
+#      这样浅色/深色模式都自动正确。只有强调色才写死。
+#
+# 强调色用「中间调」，在白底和黑底上都看得清；
+# 下面的 <style> 再针对深色模式换成更亮的版本（用 !important 覆盖行内样式）。
+ACCENT = {
+    "word": "#D93F3F",   # 单词：红
+    "dlg":  "#3D8BD4",   # 对话英文：蓝
+    "key":  "#B07A2E",   # 今日一句：棕
 }
+ACCENT_DARK = {
+    "word": "#FF7A7A",
+    "dlg":  "#7FBEFF",
+    "key":  "#E3B461",
+}
+
+CSS = {
+    "head":   "font-size:17px;font-weight:700;margin:22px 0 10px",
+    "word":   f"font-size:17px;font-weight:700;color:{ACCENT['word']}",
+    "phon":   "font-size:15px;opacity:.75",       # 音标：淡一点，不指定颜色
+    "wzh":    "font-size:16px;font-weight:700",   # 词义：加粗，继承颜色
+    "en":     "font-size:15px",
+    "zh":     "font-size:15px",
+    "topic":  "font-size:15px;opacity:.75",
+    "dlg":    f"font-size:15px;font-weight:700;color:{ACCENT['dlg']}",
+    "spk":    "font-size:15px;opacity:.75",
+    "key":    f"font-size:15px;font-weight:700;color:{ACCENT['key']}",
+    "note":   "font-size:15px",
+}
+
+STYLE_BLOCK = (
+    "<style>"
+    "@media (prefers-color-scheme: dark){"
+    f".w{{color:{ACCENT_DARK['word']}!important}}"
+    f".d{{color:{ACCENT_DARK['dlg']}!important}}"
+    f".k{{color:{ACCENT_DARK['key']}!important}}"
+    "}"
+    "</style>"
+)
 # ------------------------------------------------------------------
 
 
@@ -292,16 +318,17 @@ def render_line(line, sec_idx):
 
     if code == "W" and len(f) >= 3:
         return (f'<p style="margin:14px 0 2px">'
-                f'<span style="{CSS["word"]}">{esc(f[0])}</span> '
-                f'<span style="{CSS["phon"]}">{esc(f[1])}</span> '
+                f'<span class="w" style="{CSS["word"]}">{esc(f[0])}</span>&nbsp;'
+                f'<span style="{CSS["phon"]}">{esc(f[1])}</span>&nbsp;'
                 f'<span style="{CSS["wzh"]}">{esc(f[2])}</span></p>')
     if code == "D" and len(f) >= 2:
         return (f'<p style="margin:6px 0 0">'
-                f'<span style="{CSS["spk"]}">{esc(f[0])}: </span>'
-                f'<span style="{CSS["dlg"]}">{esc(f[1])}</span></p>')
+                f'<span style="{CSS["spk"]}">{esc(f[0])}:&nbsp;</span>'
+                f'<span class="d" style="{CSS["dlg"]}">{esc(f[1])}</span></p>')
     if code == "E":
-        style = CSS["key"] if sec_idx == 3 else CSS["en"]
-        return f'<p style="margin:2px 0;{style}">{esc(f[0])}</p>'
+        if sec_idx == 3:
+            return f'<p class="k" style="margin:2px 0;{CSS["key"]}">{esc(f[0])}</p>'
+        return f'<p style="margin:2px 0;{CSS["en"]}">{esc(f[0])}</p>'
     if code == "C":
         return f'<p style="margin:2px 0;{CSS["zh"]}">{esc(f[0])}</p>'
     if code == "T":
@@ -315,7 +342,7 @@ def render_line(line, sec_idx):
 def build_html(sections, paths):
     """把小节和音频拼成 HTML：每节标题后面挂一个播放条，
     正文就在下面，播放时不离开当前页面。"""
-    out = []
+    out = [STYLE_BLOCK]
     for i, (head, body) in enumerate(sections):
         out.append(f'<p style="{CSS["head"]}">【{esc(head)}】</p>')
         p = paths[i] if i < len(paths) else None
