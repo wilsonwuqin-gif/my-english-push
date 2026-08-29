@@ -21,7 +21,7 @@ import urllib.error
 START_DATE    = datetime.date(2026, 9, 1)  # 学习起始日，改成你真正开始的那天
 WORDS_PER_DAY = 3                          # 每天新词数量
 REVIEW_DAYS   = 3                          # 复习前几天的词
-MAX_TOKENS    = 3000
+MAX_TOKENS    = 4000
 
 # ---- 音频朗读 ----
 ENABLE_AUDIO    = True
@@ -124,6 +124,9 @@ def call_ai(prompt):
             "max_tokens": MAX_TOKENS,
             "messages": [{"role": "user", "content": prompt}],
             "stream": False,
+            # DeepSeek 思考模式默认开启且 effort=high，会把 max_tokens
+            # 全部消耗在思维链上导致正文为空。这类格式化写作不需要思考。
+            "thinking": {"type": "disabled"},
         }
         headers = {
             "Authorization": "Bearer " + api_key,
@@ -151,7 +154,11 @@ def call_ai(prompt):
         raise SystemExit(f"[调用 {PROVIDER} 失败] HTTP {e.code}: {detail}")
 
     if PROVIDER == "deepseek":
-        return resp["choices"][0]["message"]["content"]
+        choice = resp["choices"][0]
+        usage  = resp.get("usage", {})
+        print(f"[AI] finish_reason={choice.get('finish_reason')} "
+              f"tokens={usage.get('completion_tokens')}/{MAX_TOKENS}")
+        return choice["message"].get("content") or ""
     return resp["content"][0]["text"]
 
 
