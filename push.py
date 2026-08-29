@@ -80,31 +80,42 @@ def build_prompt(todays, reviews):
 今天的 {len(todays)} 个新词：{todays}
 需要复习的词：{reviews}
 
-请生成今日学习卡片，严格按以下格式。
-前四节（卡片正文）控制在 500 字以内；
-第五节【朗读稿】不计入这个字数，必须完整输出，不可省略：
+请生成今日学习卡片。全文用纯文本，禁止使用任何 Markdown 符号
+（不要星号、井号、反引号、横线分隔符）。严格按以下八节输出，
+每节的标记必须原样写出，包括方括号，标记单独占一行：
 
-【今日 {len(todays)} 词】
-逐个给出：单词 / 音标 / 中文 / 一个来自智慧建筑或新加坡医院项目的真实工作例句（中英对照）
+[S1]今日 {len(todays)} 词
+逐个给出：单词 / 音标 / 中文 / 一个来自智慧建筑或新加坡医院项目的
+真实工作例句（中英对照）
 
-【场景对话】
+[S2]场景对话
 写一段 4 轮的项目会议对话（中英对照），必须自然用上今天这几个词，
 场景从以下随机选：冷站节能讨论 / 设备接入调试 / 项目进度会 / 与顾问的技术澄清
 
-【昨日回顾】
+[S3]昨日回顾
 把需要复习的词做成 3 道中译英填空题，答案放在最后
 
-【今日一句】
+[S4]今日一句
 一句会议高频表达，中英对照，标注使用场景
 
-【朗读稿】
-这一段是给语音朗读用的，必须是纯文本，规则如下：
-- 不要任何 Markdown 符号、不要音标、不要括号注释、不要序号编号
-- 每个新词按「英文词。英文词。中文意思。英文例句。英文例句。」的顺序写，
-  英文部分重复两遍便于跟读
-- 然后把场景对话的英文部分完整读一遍，中文不读
-- 最后读今日一句的英文，重复两遍
-- 句子之间用句号分隔，让语音停顿自然
+以上四节合计控制在 500 字以内。
+下面四节是给语音朗读用的，不计入字数，必须完整输出、不可省略。
+朗读稿必须是纯文本：不要音标、不要括号注释、不要序号编号，
+句子之间用句号分隔，让语音停顿自然。
+
+[A1]
+朗读第一节。每个新词按「英文词。英文词。中文意思。英文例句。英文例句。」
+的顺序写，英文部分重复两遍便于跟读。
+
+[A2]
+朗读第二节。把场景对话的英文部分完整读一遍，中文不读。
+
+[A3]
+朗读第三节。把三道填空题的正确英文答案句各读两遍。若今日无复习词，写一句
+No review today.
+
+[A4]
+朗读第四节。今日一句的英文，重复两遍。
 
 只输出卡片内容本身，不要任何开场白或结束语。"""
 
@@ -162,30 +173,36 @@ def call_ai(prompt):
     return resp["content"][0]["text"]
 
 
-def split_script(raw):
-    """把【朗读稿】从卡片里剥离出来，返回 (展示用卡片, 朗读稿)"""
-    m = re.search(r"【朗读稿】", raw)
-    if not m:
-        return raw, ""
-    card   = raw[:m.start()].rstrip()
-    script = raw[m.end():].strip()
-    # 兜底：如果切完正文是空的（【朗读稿】出现在开头等异常情况），
-    # 宁可把整段原文推给你，也不能推一条空消息
-    if not card:
-        print("[切分] 剥离后正文为空，改用原始全文")
-        card = raw.strip()
-    return card, script
+SEC_RE = re.compile(r"\[(S[1-4]|A[1-4])\]")
 
 
-def make_audio(script, day_n):
-    """用 edge-tts 生成 mp3，返回文件相对路径；失败返回 None（不影响文字推送）"""
-    if not ENABLE_AUDIO:
-        print("[音频] ENABLE_AUDIO 为 False，跳过")
+def parse_sections(raw):
+    """把 AI 输出切成 4 个正文小节和 4 段朗读稿。
+    返回 ([(小节标题, 小节正文), ...], [朗读稿, ...])"""
+    parts = SEC_RE.split(raw)      # [前言, 'S1', 内容, 'S2', 内容, ...]
+    d = {}
+    for i in range(1, len(parts) - 1, 2):
+        d[parts[i]] = parts[i + 1].strip()
+
+    sections, scripts = [], []
+    for n in range(1, 5):
+        body = d.get(f"S{n}", "")
+        if body:
+            head, _, rest = body.partition("\n")
+            sections.append((head.strip(), rest.strip()))
+        scripts.append(d.get(f"A{n}", ""))
+
+    if not sections:               # 兜底：AI 没按格式输出就整段推送
+        print("[切分] 未识别到分节标记，按整段处理")
+        sections = [("今日内容", raw.strip())]
+        scripts = [""]
+    return sections, scripts
+
+
+def make_audio(script, day_n, idx):
+    """给第 idx 节生成 mp3，返回相对路径；失败返回 None（不影响文字推送）"""
+    if not (ENABLE_AUDIO and script.strip()):
         return None
-    if not script:
-        print("[音频] AI 未输出【朗读稿】一节，无内容可朗读，跳过")
-        return None
-    print(f"[音频] 朗读稿 {len(script)} 字，开始合成…")
     try:
         import edge_tts
     except ImportError:
@@ -193,7 +210,7 @@ def make_audio(script, day_n):
         return None
 
     os.makedirs(AUDIO_DIR, exist_ok=True)
-    path = f"{AUDIO_DIR}/day-{day_n + 1:03d}.mp3"
+    path = f"{AUDIO_DIR}/day-{day_n + 1:03d}-{idx}.mp3"
 
     async def _run():
         tts = edge_tts.Communicate(script, VOICE, rate=SPEECH_RATE)
@@ -202,21 +219,28 @@ def make_audio(script, day_n):
     try:
         asyncio.run(_run())
     except Exception as e:
-        print(f"[音频] 生成失败，跳过：{e}")
+        print(f"[音频] 第 {idx} 节生成失败：{e}")
         return None
 
-    size = os.path.getsize(path)
-    print(f"[音频] 已生成 {path}（{size // 1024} KB）")
-    cleanup_audio()
+    print(f"[音频] 第 {idx} 节 {len(script)} 字 -> {path}"
+          f"（{os.path.getsize(path) // 1024} KB）")
     return path
 
 
 def cleanup_audio():
-    """只保留最近 KEEP_AUDIO_DAYS 个 mp3，避免仓库无限膨胀"""
-    files = sorted(glob.glob(f"{AUDIO_DIR}/day-*.mp3"))
-    for old in files[:-KEEP_AUDIO_DAYS]:
-        os.remove(old)
-        print(f"[音频] 清理旧文件 {old}")
+    """按天分组，只保留最近 KEEP_AUDIO_DAYS 天的 mp3"""
+    def day_of(f):
+        m = re.search(r"day-(\d+)-", os.path.basename(f))
+        return int(m.group(1)) if m else None
+
+    files = glob.glob(f"{AUDIO_DIR}/day-*.mp3")
+    days = {d for d in (day_of(f) for f in files) if d is not None}
+    keep = set(sorted(days)[-KEEP_AUDIO_DAYS:])
+    for f in files:
+        d = day_of(f)
+        if d is not None and d not in keep:
+            os.remove(f)
+            print(f"[音频] 清理旧文件 {f}")
 
 
 def audio_url(path):
@@ -224,12 +248,24 @@ def audio_url(path):
     return f"https://cdn.jsdelivr.net/gh/{GH_REPO}@main/{path}"
 
 
+def build_html(sections, paths):
+    """把小节和音频拼成 HTML：每节标题后面挂一个播放条，
+    正文就在下面，播放时不离开当前页面。"""
+    out = []
+    for i, (head, body) in enumerate(sections):
+        out.append(f'<h3 style="margin:18px 0 6px">{head}</h3>')
+        p = paths[i] if i < len(paths) else None
+        if p:
+            out.append(
+                f'<audio controls preload="none" style="width:100%;height:36px"'
+                f' src="{audio_url(p)}">你的浏览器不支持音频播放</audio>')
+        out.append(body.replace("\n", "<br>"))
+    return "".join(out)
+
+
 def push_wechat(title, content, token):
-    # AI 输出的是 Markdown。markdown 模板能正确渲染 **加粗** 和链接；
-    # 如果微信里显示效果不理想，设环境变量 PUSH_TEMPLATE=html
-    template = os.environ.get("PUSH_TEMPLATE", "markdown")
-    if template == "html":
-        content = content.replace("\n", "<br>")
+    # 内容已经是 HTML（含 <audio> 播放条），用 html 模板原样渲染
+    template = os.environ.get("PUSH_TEMPLATE", "html")
     payload = json.dumps({
         "token": token,
         "title": title,
@@ -270,25 +306,30 @@ def do_generate(day_n):
 
     raw = call_ai(build_prompt(todays, reviews))
     print(f"[AI] 返回 {len(raw)} 字")
-    card, script = split_script(raw)
-    print(f"[切分] 正文 {len(card)} 字 / 朗读稿 {len(script)} 字")
-    if not card:
+    if not raw.strip():
         raise SystemExit("[错误] AI 返回内容为空，请检查 API 状态")
-    path = make_audio(script, day_n)
+
+    sections, scripts = parse_sections(raw)
+    print(f"[切分] {len(sections)} 个小节：" +
+          " / ".join(f"{h}({len(b)}字)" for h, b in sections))
+
+    paths = [make_audio(scripts[i] if i < len(scripts) else "", day_n, i + 1)
+             for i in range(len(sections))]
+    cleanup_audio()
 
     with open(CARD_CACHE, "w", encoding="utf-8") as f:
-        json.dump({"day_n": day_n, "card": card, "audio": path},
+        json.dump({"day_n": day_n, "sections": sections, "paths": paths},
                   f, ensure_ascii=False)
-    return card, path
+    return sections, paths
 
 
-def do_send(day_n, card, path):
+def do_send(day_n, sections, paths):
     title = f"英语打卡 Day {day_n + 1}"
-    print(f"[发送] 正文 {len(card)} 字，音频 {path or '无'}")
-    if not card.strip():
+    n_audio = sum(1 for p in paths if p)
+    print(f"[发送] {len(sections)} 个小节，{n_audio} 段音频")
+    if not sections:
         raise SystemExit("[错误] 待发送内容为空，中止（不发空消息）")
-    if path:
-        card += "\n\n---\n🎧 [点此收听今日朗读](" + audio_url(path) + ")"
+    card = build_html(sections, paths)
 
     if DRY_RUN:
         print("=" * 40)
@@ -320,12 +361,12 @@ def main():
             raise SystemExit(f"找不到 {CARD_CACHE}，请先运行 generate")
         with open(CARD_CACHE, encoding="utf-8") as f:
             d = json.load(f)
-        do_send(d["day_n"], d["card"], d.get("audio"))
+        do_send(d["day_n"], d["sections"], d["paths"])
         return
 
-    card, path = do_generate(day_n)
+    sections, paths = do_generate(day_n)
     if mode != "generate":
-        do_send(day_n, card, path)
+        do_send(day_n, sections, paths)
 
 
 if __name__ == "__main__":
