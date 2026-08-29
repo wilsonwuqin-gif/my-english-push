@@ -18,7 +18,11 @@ import urllib.request
 import urllib.error
 
 # ---------------- 可调参数 ----------------
-START_DATE    = datetime.date(2026, 9, 1)  # 学习起始日，改成你真正开始的那天
+# GitHub Actions 的机器是 UTC 时区。cron 在 UTC 23:00 触发时北京已是次日早 7 点，
+# 但机器上的 date.today() 还停在前一天，直接用会导致 Day 编号错一天。
+BEIJING = datetime.timezone(datetime.timedelta(hours=8))
+
+START_DATE    = datetime.date(2026, 8, 30)  # 学习起始日 = 第 1 天（北京时间）
 WORDS_PER_DAY = 3                          # 每天新词数量
 REVIEW_DAYS   = 3                          # 复习前几天的词
 MAX_TOKENS    = 4000
@@ -378,8 +382,9 @@ def push_wechat(title, content, token):
 
 
 def resolve_day():
-    today = datetime.date.today()
+    today = datetime.datetime.now(BEIJING).date()      # 按北京时间算，不用 UTC
     day_n = (today - START_DATE).days
+    print(f"[日期] 北京时间 {today}，起始日 {START_DATE}")
     if day_n < 0:
         # 测试用：设 FORCE_DAY=1 可在起始日之前强制按第 1 天跑
         force = os.environ.get("FORCE_DAY")
