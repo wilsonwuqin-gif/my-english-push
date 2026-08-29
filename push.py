@@ -84,19 +84,34 @@ def build_prompt(todays, reviews):
 （不要星号、井号、反引号、横线分隔符）。严格按以下八节输出，
 每节的标记必须原样写出，包括方括号，标记单独占一行：
 
+正文部分每一行都必须以一个「行标记 + 竖线」开头，不得有例外。
+可用的行标记只有以下几种，含义固定：
+  W| 单词行，格式为  W|单词|音标|中文    音标要带前后斜杠
+  E| 英文行
+  C| 中文行
+  T| 小标题行（例如对话的场景名）
+  D| 对话行，格式为  D|说话人|英文句
+  Q| 题目行
+  K| 答案行
+  U| 补充说明行（例如使用场景）
+
 [S1]今日 {len(todays)} 词
-逐个给出：单词 / 音标 / 中文 / 一个来自智慧建筑或新加坡医院项目的
-真实工作例句（中英对照）
+每个词写三行：先 W| 行，再 E| 行给一个来自智慧建筑或新加坡医院项目的
+真实工作英文例句，再 C| 行给该例句的中文翻译。
 
 [S2]场景对话
-写一段 4 轮的项目会议对话（中英对照），必须自然用上今天这几个词，
-场景从以下随机选：冷站节能讨论 / 设备接入调试 / 项目进度会 / 与顾问的技术澄清
+先一行 T| 写场景名，场景从以下随机选：冷站节能讨论 / 设备接入调试 /
+项目进度会 / 与顾问的技术澄清。
+然后写 4 轮对话，每轮两行：D|说话人|英文句，紧跟 C|该句中文。
+对话必须自然用上今天这几个词。
 
 [S3]昨日回顾
-把需要复习的词做成 3 道中译英填空题，答案放在最后
+把需要复习的词做成 3 道中译英填空题，每题一行 Q|，
+最后把三题答案写成一行 K|。若今日无复习词，只写一行 C|今日无复习词。
 
 [S4]今日一句
-一句会议高频表达，中英对照，标注使用场景
+三行：E|英文句，C|中文，U|使用场景说明。
+内容是一句会议高频表达。
 
 以上四节合计控制在 500 字以内。
 下面四节是给语音朗读用的，不计入字数，必须完整输出、不可省略。
@@ -248,18 +263,69 @@ def audio_url(path):
     return f"https://cdn.jsdelivr.net/gh/{GH_REPO}@main/{path}"
 
 
+# ---------------- 排版样式（改这里就能调颜色字号） ----------------
+CSS = {
+    "head":   "font-size:17px;font-weight:700;color:#000;margin:22px 0 10px",
+    "word":   "font-size:17px;font-weight:700;color:#C00000",   # 单词：深红加粗
+    "phon":   "font-size:15px;color:#000",                      # 音标：黑色常规
+    "wzh":    "font-size:16px;font-weight:700;color:#000",      # 词义：黑色加粗
+    "en":     "font-size:15px;color:#000",                      # 例句英文
+    "zh":     "font-size:15px;color:#000",                      # 中文
+    "topic":  "font-size:15px;color:#000",                      # 场景名
+    "dlg":    "font-size:15px;font-weight:700;color:#1F6FC4",   # 对话英文：蓝色加粗
+    "spk":    "font-size:15px;color:#000",                      # 说话人 A: B:
+    "key":    "font-size:15px;font-weight:700;color:#8C4B10",   # 今日一句：棕色加粗
+    "note":   "font-size:15px;color:#000",                      # 使用场景等
+}
+# ------------------------------------------------------------------
+
+
+def esc(t):
+    return (t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+
+
+def render_line(line, sec_idx):
+    """把一行带标记的文本渲染成 HTML。sec_idx 从 0 起，用于区分【今日一句】"""
+    code, _, rest = line.partition("|")
+    code = code.strip()
+    f = [p.strip() for p in rest.split("|")]
+
+    if code == "W" and len(f) >= 3:
+        return (f'<p style="margin:14px 0 2px">'
+                f'<span style="{CSS["word"]}">{esc(f[0])}</span> '
+                f'<span style="{CSS["phon"]}">{esc(f[1])}</span> '
+                f'<span style="{CSS["wzh"]}">{esc(f[2])}</span></p>')
+    if code == "D" and len(f) >= 2:
+        return (f'<p style="margin:6px 0 0">'
+                f'<span style="{CSS["spk"]}">{esc(f[0])}: </span>'
+                f'<span style="{CSS["dlg"]}">{esc(f[1])}</span></p>')
+    if code == "E":
+        style = CSS["key"] if sec_idx == 3 else CSS["en"]
+        return f'<p style="margin:2px 0;{style}">{esc(f[0])}</p>'
+    if code == "C":
+        return f'<p style="margin:2px 0;{CSS["zh"]}">{esc(f[0])}</p>'
+    if code == "T":
+        return f'<p style="margin:2px 0;{CSS["topic"]}">{esc(f[0])}</p>'
+    if code in ("Q", "K", "U"):
+        return f'<p style="margin:4px 0;{CSS["note"]}">{esc(f[0])}</p>'
+    # 没有标记或标记不认识：原样输出，保证内容不丢
+    return f'<p style="margin:4px 0;{CSS["note"]}">{esc(line)}</p>'
+
+
 def build_html(sections, paths):
     """把小节和音频拼成 HTML：每节标题后面挂一个播放条，
     正文就在下面，播放时不离开当前页面。"""
     out = []
     for i, (head, body) in enumerate(sections):
-        out.append(f'<h3 style="margin:18px 0 6px">{head}</h3>')
+        out.append(f'<p style="{CSS["head"]}">【{esc(head)}】</p>')
         p = paths[i] if i < len(paths) else None
         if p:
             out.append(
-                f'<audio controls preload="none" style="width:100%;height:36px"'
+                f'<audio controls preload="none" style="width:100%;height:34px"'
                 f' src="{audio_url(p)}">你的浏览器不支持音频播放</audio>')
-        out.append(body.replace("\n", "<br>"))
+        for line in body.splitlines():
+            if line.strip():
+                out.append(render_line(line.strip(), i))
     return "".join(out)
 
 
