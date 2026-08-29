@@ -155,12 +155,19 @@ def call_ai(prompt):
     return resp["content"][0]["text"]
 
 
-def split_script(card):
+def split_script(raw):
     """把【朗读稿】从卡片里剥离出来，返回 (展示用卡片, 朗读稿)"""
-    m = re.search(r"【朗读稿】", card)
+    m = re.search(r"【朗读稿】", raw)
     if not m:
-        return card, ""
-    return card[:m.start()].rstrip(), card[m.end():].strip()
+        return raw, ""
+    card   = raw[:m.start()].rstrip()
+    script = raw[m.end():].strip()
+    # 兜底：如果切完正文是空的（【朗读稿】出现在开头等异常情况），
+    # 宁可把整段原文推给你，也不能推一条空消息
+    if not card:
+        print("[切分] 剥离后正文为空，改用原始全文")
+        card = raw.strip()
+    return card, script
 
 
 def make_audio(script, day_n):
@@ -254,8 +261,12 @@ def do_generate(day_n):
     todays, reviews = pick_today(words, day_n)
     print(f"Day {day_n + 1} (第 {day_n // 7 + 1} 周) 今日词：{todays}")
 
-    card = call_ai(build_prompt(todays, reviews))
-    card, script = split_script(card)
+    raw = call_ai(build_prompt(todays, reviews))
+    print(f"[AI] 返回 {len(raw)} 字")
+    card, script = split_script(raw)
+    print(f"[切分] 正文 {len(card)} 字 / 朗读稿 {len(script)} 字")
+    if not card:
+        raise SystemExit("[错误] AI 返回内容为空，请检查 API 状态")
     path = make_audio(script, day_n)
 
     with open(CARD_CACHE, "w", encoding="utf-8") as f:
@@ -266,6 +277,9 @@ def do_generate(day_n):
 
 def do_send(day_n, card, path):
     title = f"英语打卡 Day {day_n + 1}"
+    print(f"[发送] 正文 {len(card)} 字，音频 {path or '无'}")
+    if not card.strip():
+        raise SystemExit("[错误] 待发送内容为空，中止（不发空消息）")
     if path:
         card += "\n\n---\n🎧 [点此收听今日朗读](" + audio_url(path) + ")"
 
