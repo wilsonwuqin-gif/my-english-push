@@ -196,6 +196,10 @@ git push -u origin main
   UTC = 北京时间 − 8 小时。想 6:30 推送就写 `'30 22 * * *'`
 - **改每天词量**：`push.py` 里 `WORDS_PER_DAY`
 - **加自己的词**：编辑 `vocab.json`，按同样格式加对象即可
+- **音频朗读**：`push.py` 顶部 `ENABLE_AUDIO`（关掉设 False）、`VOICE`（音色）、
+  `SPEECH_RATE`（语速，`-10%` 表示放慢一成）、`KEEP_AUDIO_DAYS`（保留几天的 mp3）。
+  朗读内容由 prompt 里的【朗读稿】一节控制。
+  音频托管在 jsDelivr CDN，**要求仓库是 public**
 - **换模型 / 换供应商**：`push.py` 顶部的 `PROVIDER` 和 `PROVIDERS` 字典。
   想要更细致的内容，DeepSeek 改 `deepseek-v4-pro`，Claude 改 `claude-sonnet-5`
 - **改 prompt**：`push.py` 里 `build_prompt()` 函数。这是全套东西里最值得你花时间调的地方

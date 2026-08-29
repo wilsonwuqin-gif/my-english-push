@@ -1,3 +1,4 @@
 .env
 __pycache__/
 *.pyc
+card_cache.txt

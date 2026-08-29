@@ -8,8 +8,11 @@
     python push.py
 """
 import os
+import re
 import sys
+import glob
 import json
+import asyncio
 import datetime
 import urllib.request
 import urllib.error
@@ -19,6 +22,17 @@ START_DATE    = datetime.date(2026, 9, 1)  # 学习起始日，改成你真正�
 WORDS_PER_DAY = 3                          # 每天新词数量
 REVIEW_DAYS   = 3                          # 复习前几天的词
 MAX_TOKENS    = 2000
+
+# ---- 音频朗读 ----
+ENABLE_AUDIO    = True
+VOICE           = "en-US-AvaMultilingualNeural"   # 多语种音色，中英混读自然
+                  # 备选：zh-CN-XiaoxiaoNeural（女声偏中文）
+                  #       en-US-BrianMultilingualNeural（男声）
+SPEECH_RATE     = "-10%"       # 语速，初学者放慢一点。正常写 "+0%"
+KEEP_AUDIO_DAYS = 7            # 仓库里只保留最近几天的 mp3
+AUDIO_DIR       = "audio"
+GH_REPO         = os.environ.get("GH_REPO", "wilsonwuqin-gif/my-english-push")
+CARD_CACHE      = "card_cache.txt"   # generate 与 send 两步之间传递内容
 
 # 用哪家的 AI: "deepseek" 或 "claude"
 PROVIDER = os.environ.get("PROVIDER", "deepseek")
@@ -81,6 +95,15 @@ def build_prompt(todays, reviews):
 【今日一句】
 一句会议高频表达，中英对照，标注使用场景
 
+【朗读稿】
+这一段是给语音朗读用的，必须是纯文本，规则如下：
+- 不要任何 Markdown 符号、不要音标、不要括号注释、不要序号编号
+- 每个新词按「英文词。英文词。中文意思。英文例句。英文例句。」的顺序写，
+  英文部分重复两遍便于跟读
+- 然后把场景对话的英文部分完整读一遍，中文不读
+- 最后读今日一句的英文，重复两遍
+- 句子之间用句号分隔，让语音停顿自然
+
 只输出卡片内容本身，不要任何开场白或结束语。"""
 
 
@@ -130,6 +153,56 @@ def call_ai(prompt):
     return resp["content"][0]["text"]
 
 
+def split_script(card):
+    """把【朗读稿】从卡片里剥离出来，返回 (展示用卡片, 朗读稿)"""
+    m = re.search(r"【朗读稿】", card)
+    if not m:
+        return card, ""
+    return card[:m.start()].rstrip(), card[m.end():].strip()
+
+
+def make_audio(script, day_n):
+    """用 edge-tts 生成 mp3，返回文件相对路径；失败返回 None（不影响文字推送）"""
+    if not (ENABLE_AUDIO and script):
+        return None
+    try:
+        import edge_tts
+    except ImportError:
+        print("[音频] 未安装 edge-tts，跳过")
+        return None
+
+    os.makedirs(AUDIO_DIR, exist_ok=True)
+    path = f"{AUDIO_DIR}/day-{day_n + 1:03d}.mp3"
+
+    async def _run():
+        tts = edge_tts.Communicate(script, VOICE, rate=SPEECH_RATE)
+        await tts.save(path)
+
+    try:
+        asyncio.run(_run())
+    except Exception as e:
+        print(f"[音频] 生成失败，跳过：{e}")
+        return None
+
+    size = os.path.getsize(path)
+    print(f"[音频] 已生成 {path}（{size // 1024} KB）")
+    cleanup_audio()
+    return path
+
+
+def cleanup_audio():
+    """只保留最近 KEEP_AUDIO_DAYS 个 mp3，避免仓库无限膨胀"""
+    files = sorted(glob.glob(f"{AUDIO_DIR}/day-*.mp3"))
+    for old in files[:-KEEP_AUDIO_DAYS]:
+        os.remove(old)
+        print(f"[音频] 清理旧文件 {old}")
+
+
+def audio_url(path):
+    """jsDelivr CDN 链接（国内访问比 GitHub 原生链接快）"""
+    return f"https://cdn.jsdelivr.net/gh/{GH_REPO}@main/{path}"
+
+
 def push_wechat(title, content, token):
     payload = json.dumps({
         "token": token,
@@ -149,7 +222,7 @@ def push_wechat(title, content, token):
     print("[推送成功]", resp.get("msg"))
 
 
-def main():
+def resolve_day():
     today = datetime.date.today()
     day_n = (today - START_DATE).days
     if day_n < 0:
@@ -158,21 +231,36 @@ def main():
         if not force:
             print(f"还没到起始日 {START_DATE}，今天不推送。"
                   f"（测试可设 FORCE_DAY=1）")
-            return
+            return None
         day_n = int(force) - 1
+    return day_n
 
+
+def do_generate(day_n):
+    """调 AI 生成卡片 + 生成音频，结果写入 CARD_CACHE"""
     words = load_words()
     todays, reviews = pick_today(words, day_n)
-    week_no = day_n // 7 + 1
-    print(f"Day {day_n + 1} (第 {week_no} 周) 今日词：{todays}")
+    print(f"Day {day_n + 1} (第 {day_n // 7 + 1} 周) 今日词：{todays}")
 
-    content = call_ai(build_prompt(todays, reviews))
+    card = call_ai(build_prompt(todays, reviews))
+    card, script = split_script(card)
+    path = make_audio(script, day_n)
 
+    with open(CARD_CACHE, "w", encoding="utf-8") as f:
+        json.dump({"day_n": day_n, "card": card, "audio": path},
+                  f, ensure_ascii=False)
+    return card, path
+
+
+def do_send(day_n, card, path):
     title = f"英语打卡 Day {day_n + 1}"
+    if path:
+        card += "\n\n---\n🎧 [点此收听今日朗读](" + audio_url(path) + ")"
+
     if DRY_RUN:
         print("=" * 40)
         print(title)
-        print(content)
+        print(card)
         print("=" * 40)
         print("(DRY_RUN 模式，未推送微信)")
         return
@@ -180,7 +268,31 @@ def main():
     token = os.environ.get("PUSHPLUS_TOKEN")
     if not token:
         raise SystemExit("缺少环境变量 PUSHPLUS_TOKEN")
-    push_wechat(title, content, token)
+    push_wechat(title, card, token)
+
+
+def main():
+    # 用法：
+    #   python push.py            本地测试，生成+推送一条龙
+    #   python push.py generate   只生成内容和音频（工作流第 1 步）
+    #   python push.py send       读取已生成的内容并推送（工作流第 3 步）
+    mode = sys.argv[1] if len(sys.argv) > 1 else "all"
+
+    day_n = resolve_day()
+    if day_n is None:
+        return
+
+    if mode == "send":
+        if not os.path.exists(CARD_CACHE):
+            raise SystemExit(f"找不到 {CARD_CACHE}，请先运行 generate")
+        with open(CARD_CACHE, encoding="utf-8") as f:
+            d = json.load(f)
+        do_send(d["day_n"], d["card"], d.get("audio"))
+        return
+
+    card, path = do_generate(day_n)
+    if mode != "generate":
+        do_send(day_n, card, path)
 
 
 if __name__ == "__main__":
