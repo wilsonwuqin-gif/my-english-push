@@ -1,0 +1,1802 @@
+[
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "chiller",
+  "zh": "冷水机组"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "centrifugal chiller",
+  "zh": "离心式冷水机组"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "screw chiller",
+  "zh": "螺杆式冷水机组"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "absorption chiller",
+  "zh": "吸收式冷水机组"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "cooling capacity",
+  "zh": "制冷量"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "refrigerant",
+  "zh": "制冷剂"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "evaporator",
+  "zh": "蒸发器"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "condenser",
+  "zh": "冷凝器"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "compressor",
+  "zh": "压缩机"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "expansion valve",
+  "zh": "膨胀阀"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "chilled water",
+  "zh": "冷冻水"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "condenser water",
+  "zh": "冷却水"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "supply temperature",
+  "zh": "供水温度"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "return temperature",
+  "zh": "回水温度"
+ },
+ {
+  "week": 1,
+  "topic": "冷源系统 I · 冷水机组",
+  "en": "delta T",
+  "zh": "供回水温差"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "cooling tower",
+  "zh": "冷却塔"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "approach temperature",
+  "zh": "逼近温度"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "wet bulb temperature",
+  "zh": "湿球温度"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "dry bulb temperature",
+  "zh": "干球温度"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "chilled water pump",
+  "zh": "冷冻水泵"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "condenser water pump",
+  "zh": "冷却水泵"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "primary loop",
+  "zh": "一次泵回路"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "secondary loop",
+  "zh": "二次泵回路"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "bypass valve",
+  "zh": "旁通阀"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "differential pressure",
+  "zh": "压差"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "staging / sequencing",
+  "zh": "加减机控制"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "part load",
+  "zh": "部分负荷"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "full load",
+  "zh": "满负荷"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "COP (coefficient of performance)",
+  "zh": "性能系数"
+ },
+ {
+  "week": 2,
+  "topic": "冷源系统 II · 冷站与能效",
+  "en": "IPLV",
+  "zh": "综合部分负荷性能系数"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "AHU (air handling unit)",
+  "zh": "空气处理机组"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "FCU (fan coil unit)",
+  "zh": "风机盘管"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "PAU (primary air unit)",
+  "zh": "新风机组"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "VAV (variable air volume)",
+  "zh": "变风量"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "CAV (constant air volume)",
+  "zh": "定风量"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "damper",
+  "zh": "风阀"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "actuator",
+  "zh": "执行器"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "two-way valve",
+  "zh": "两通阀"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "three-way valve",
+  "zh": "三通阀"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "coil",
+  "zh": "盘管"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "filter",
+  "zh": "过滤器"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "humidifier",
+  "zh": "加湿器"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "dehumidification",
+  "zh": "除湿"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "balancing valve",
+  "zh": "平衡阀"
+ },
+ {
+  "week": 3,
+  "topic": "空调水系统与末端",
+  "en": "strainer",
+  "zh": "过滤网 / Y 型过滤器"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "supply air",
+  "zh": "送风"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "return air",
+  "zh": "回风"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "fresh air / outdoor air",
+  "zh": "新风"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "exhaust air",
+  "zh": "排风"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "air change rate",
+  "zh": "换气次数"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "static pressure",
+  "zh": "静压"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "airflow rate",
+  "zh": "风量"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "duct",
+  "zh": "风管"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "diffuser",
+  "zh": "散流器"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "grille",
+  "zh": "格栅"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "heat recovery",
+  "zh": "热回收"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "economizer",
+  "zh": "新风节能"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "enthalpy",
+  "zh": "焓值"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "pressure differential",
+  "zh": "压差控制"
+ },
+ {
+  "week": 4,
+  "topic": "通风与空气处理",
+  "en": "air tightness",
+  "zh": "气密性"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "BAS (building automation system)",
+  "zh": "楼宇自控系统"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "BMS (building management system)",
+  "zh": "楼宇管理系统"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "DDC (direct digital controller)",
+  "zh": "直接数字控制器"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "PLC",
+  "zh": "可编程逻辑控制器"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "controller",
+  "zh": "控制器"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "sensor",
+  "zh": "传感器"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "setpoint",
+  "zh": "设定值"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "feedback",
+  "zh": "反馈"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "interlock",
+  "zh": "联锁"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "sequence of operation",
+  "zh": "控制逻辑说明"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "control loop",
+  "zh": "控制回路"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "PID control",
+  "zh": "PID 控制"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "override",
+  "zh": "手动强制"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "trend log",
+  "zh": "趋势记录"
+ },
+ {
+  "week": 5,
+  "topic": "楼宇自控 I · 系统与控制",
+  "en": "alarm management",
+  "zh": "报警管理"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "BACnet",
+  "zh": "楼控通信协议"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "Modbus",
+  "zh": "工业通信协议"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "OPC UA",
+  "zh": "工业互操作标准"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "gateway",
+  "zh": "网关"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "protocol",
+  "zh": "协议"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "point list",
+  "zh": "点表"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "AI (analog input)",
+  "zh": "模拟量输入"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "AO (analog output)",
+  "zh": "模拟量输出"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "DI (digital input)",
+  "zh": "数字量输入"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "DO (digital output)",
+  "zh": "数字量输出"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "I/O module",
+  "zh": "输入输出模块"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "system integration",
+  "zh": "系统集成"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "interface",
+  "zh": "接口"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "polling",
+  "zh": "轮询"
+ },
+ {
+  "week": 6,
+  "topic": "楼宇自控 II · 协议与点表",
+  "en": "commissioning",
+  "zh": "调试"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "digital twin",
+  "zh": "数字孪生"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "BIM",
+  "zh": "建筑信息模型"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "lightweight model",
+  "zh": "轻量化模型"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "3D visualization",
+  "zh": "三维可视化"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "dashboard",
+  "zh": "仪表盘"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "real-time data",
+  "zh": "实时数据"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "historian",
+  "zh": "历史数据库"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "data acquisition",
+  "zh": "数据采集"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "edge computing",
+  "zh": "边缘计算"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "IoT platform",
+  "zh": "物联网平台"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "API",
+  "zh": "应用程序接口"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "middleware",
+  "zh": "中间件"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "simulation",
+  "zh": "仿真"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "what-if analysis",
+  "zh": "情景推演"
+ },
+ {
+  "week": 7,
+  "topic": "数字孪生与平台",
+  "en": "asset register",
+  "zh": "资产台账"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "O&M (operation and maintenance)",
+  "zh": "运维"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "FM (facility management)",
+  "zh": "设施管理"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "CMMS",
+  "zh": "计算机化维护管理系统"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "work order",
+  "zh": "工单"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "preventive maintenance",
+  "zh": "预防性维护"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "predictive maintenance",
+  "zh": "预测性维护"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "corrective maintenance",
+  "zh": "纠正性维护"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "breakdown",
+  "zh": "故障"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "downtime",
+  "zh": "停机时间"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "spare parts",
+  "zh": "备品备件"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "inspection",
+  "zh": "巡检"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "checklist",
+  "zh": "检查表"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "SLA (service level agreement)",
+  "zh": "服务水平协议"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "KPI",
+  "zh": "关键绩效指标"
+ },
+ {
+  "week": 8,
+  "topic": "运维与工单",
+  "en": "root cause analysis",
+  "zh": "根因分析"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "energy consumption",
+  "zh": "能耗"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "energy efficiency",
+  "zh": "能效"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "baseline",
+  "zh": "基线"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "benchmark",
+  "zh": "标杆值"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "kWh",
+  "zh": "千瓦时"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "peak demand",
+  "zh": "峰值需求"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "load profile",
+  "zh": "负荷曲线"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "submetering",
+  "zh": "分项计量"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "energy audit",
+  "zh": "能源审计"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "retrofit",
+  "zh": "改造"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "payback period",
+  "zh": "投资回收期"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "ROI",
+  "zh": "投资回报率"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "EMC / EPC",
+  "zh": "合同能源管理"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "M&V (measurement & verification)",
+  "zh": "测量与验证"
+ },
+ {
+  "week": 9,
+  "topic": "能源与节能",
+  "en": "energy savings",
+  "zh": "节能量"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "carbon emission",
+  "zh": "碳排放"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "carbon neutrality",
+  "zh": "碳中和"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "carbon peak",
+  "zh": "碳达峰"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "Scope 1 / 2 / 3",
+  "zh": "范围一 / 二 / 三排放"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "carbon footprint",
+  "zh": "碳足迹"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "emission factor",
+  "zh": "排放因子"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "carbon credit",
+  "zh": "碳信用"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "carbon trading",
+  "zh": "碳交易"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "carbon asset",
+  "zh": "碳资产"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "renewable energy",
+  "zh": "可再生能源"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "photovoltaic (PV)",
+  "zh": "光伏"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "green building",
+  "zh": "绿色建筑"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "LEED",
+  "zh": "美国绿色建筑认证"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "Green Mark",
+  "zh": "新加坡绿色建筑标志"
+ },
+ {
+  "week": 10,
+  "topic": "双碳与绿色建筑",
+  "en": "net zero",
+  "zh": "净零排放"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "scope of work",
+  "zh": "工作范围"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "deliverable",
+  "zh": "交付物"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "milestone",
+  "zh": "里程碑"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "schedule",
+  "zh": "进度计划"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "critical path",
+  "zh": "关键路径"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "lead time",
+  "zh": "前置时间"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "progress claim",
+  "zh": "进度款申请"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "variation order (VO)",
+  "zh": "变更单"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "change request",
+  "zh": "变更申请"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "punch list",
+  "zh": "缺陷清单"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "snagging",
+  "zh": "收尾整改"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "handover",
+  "zh": "移交"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "defect liability period",
+  "zh": "缺陷责任期"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "as-built drawing",
+  "zh": "竣工图"
+ },
+ {
+  "week": 11,
+  "topic": "项目管理 I · 进度与交付",
+  "en": "testing and commissioning (T&C)",
+  "zh": "测试与调试"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "main contractor",
+  "zh": "总承包商"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "subcontractor",
+  "zh": "分包商"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "consultant",
+  "zh": "顾问"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "client / employer",
+  "zh": "业主"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "tender",
+  "zh": "招标"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "bid",
+  "zh": "投标"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "ITB (invitation to bid)",
+  "zh": "招标邀请"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "BOQ (bill of quantities)",
+  "zh": "工程量清单"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "LOA (letter of award)",
+  "zh": "中标通知书"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "provisional sum",
+  "zh": "暂列金额"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "retention",
+  "zh": "质保金"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "liquidated damages",
+  "zh": "违约赔偿金"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "EOT (extension of time)",
+  "zh": "工期延长"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "claim",
+  "zh": "索赔"
+ },
+ {
+  "week": 12,
+  "topic": "项目管理 II · 合同与商务",
+  "en": "back charge",
+  "zh": "反向扣款"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "submittal",
+  "zh": "报审文件"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "shop drawing",
+  "zh": "深化图"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "method statement",
+  "zh": "施工方案"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "RFI (request for information)",
+  "zh": "技术澄清函"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "technical clarification",
+  "zh": "技术澄清"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "specification",
+  "zh": "技术规格书"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "datasheet",
+  "zh": "产品参数表"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "compliance",
+  "zh": "符合性"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "deviation",
+  "zh": "偏离"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "approval",
+  "zh": "批准"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "review comment",
+  "zh": "审查意见"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "revision",
+  "zh": "版本修订"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "mock-up",
+  "zh": "样板"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "FAT (factory acceptance test)",
+  "zh": "工厂验收测试"
+ },
+ {
+  "week": 13,
+  "topic": "技术文件与审批流程",
+  "en": "SAT (site acceptance test)",
+  "zh": "现场验收测试"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "site visit",
+  "zh": "现场踏勘"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "permit to work",
+  "zh": "作业许可"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "risk assessment",
+  "zh": "风险评估"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "toolbox meeting",
+  "zh": "班前安全会"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "PPE",
+  "zh": "个人防护装备"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "safety induction",
+  "zh": "入场安全教育"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "near miss",
+  "zh": "未遂事故"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "housekeeping",
+  "zh": "现场清理"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "access",
+  "zh": "通道 / 进入权限"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "scaffolding",
+  "zh": "脚手架"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "hot work",
+  "zh": "动火作业"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "confined space",
+  "zh": "受限空间"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "lockout / tagout",
+  "zh": "上锁挂牌"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "incident report",
+  "zh": "事故报告"
+ },
+ {
+  "week": 14,
+  "topic": "现场与安全",
+  "en": "work at height",
+  "zh": "高处作业"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "BCA",
+  "zh": "新加坡建设局"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "QP (qualified person)",
+  "zh": "注册专业人士"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "TOP (temporary occupation permit)",
+  "zh": "临时入伙准证"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "CSC (certificate of statutory completion)",
+  "zh": "法定竣工证书"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "URA",
+  "zh": "市区重建局"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "NEA",
+  "zh": "国家环境局"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "SCDF",
+  "zh": "民防部队（消防）"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "PUB",
+  "zh": "公用事业局（水务）"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "LTA",
+  "zh": "陆路交通管理局"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "MOM",
+  "zh": "人力部"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "work permit",
+  "zh": "工作准证"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "clerk of works (COW)",
+  "zh": "工程监督"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "IDD (integrated digital delivery)",
+  "zh": "综合数字化交付"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "buildability score",
+  "zh": "可建性评分"
+ },
+ {
+  "week": 15,
+  "topic": "新加坡建筑业专有词",
+  "en": "Green Mark Platinum",
+  "zh": "绿色建筑白金级"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "agenda",
+  "zh": "议程"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "minutes",
+  "zh": "会议纪要"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "action item",
+  "zh": "待办事项"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "follow-up",
+  "zh": "跟进"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "attendee",
+  "zh": "参会人"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "chair",
+  "zh": "主持人"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "progress update",
+  "zh": "进展汇报"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "status",
+  "zh": "状态"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "pending",
+  "zh": "待定"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "on track",
+  "zh": "按计划进行"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "delayed",
+  "zh": "延期"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "blocker",
+  "zh": "阻碍项"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "escalate",
+  "zh": "升级上报"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "align",
+  "zh": "对齐 / 达成一致"
+ },
+ {
+  "week": 16,
+  "topic": "会议 I · 常用名词",
+  "en": "clarify",
+  "zh": "澄清"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "Could you elaborate on that?",
+  "zh": "能展开说一下吗？"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "Let me clarify one point.",
+  "zh": "我澄清一点。"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "I'd like to add something here.",
+  "zh": "我补充一点。"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "We need to align on the scope.",
+  "zh": "我们需要在范围上对齐。"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "Can we take this offline?",
+  "zh": "这个我们会后单独聊好吗？"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "What's the timeline for this?",
+  "zh": "这件事的时间节点是什么？"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "Who owns this action item?",
+  "zh": "这项待办由谁负责？"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "I'll get back to you by Friday.",
+  "zh": "我周五前回复你。"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "Let's park this for now.",
+  "zh": "这个先搁置。"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "From our side, the issue is...",
+  "zh": "从我们这边看，问题在于……"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "Correct me if I'm wrong, but...",
+  "zh": "如果我理解有误请指正，不过……"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "Just to confirm, you mean...?",
+  "zh": "确认一下，你的意思是……？"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "That's a valid concern.",
+  "zh": "这个顾虑是合理的。"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "We're on track for the milestone.",
+  "zh": "我们的里程碑进度正常。"
+ },
+ {
+  "week": 17,
+  "topic": "会议 II · 高频句型（整句背）",
+  "en": "Any blockers on your end?",
+  "zh": "你那边有什么阻碍吗？"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Please find attached...",
+  "zh": "附件请查收……"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "As discussed in the meeting,",
+  "zh": "如会议所讨论，"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Further to our conversation,",
+  "zh": "承接我们的沟通，"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Kindly advise.",
+  "zh": "请告知。"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "At your earliest convenience",
+  "zh": "请尽快"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Please be informed that...",
+  "zh": "兹通知……"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "We would appreciate it if you could...",
+  "zh": "如您能……我们将不胜感激"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Regarding your query on...",
+  "zh": "关于您就……的询问"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Should you have any questions,",
+  "zh": "如有任何疑问，"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Look forward to your reply.",
+  "zh": "期待您的回复。"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Noted with thanks.",
+  "zh": "已收悉，谢谢。"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Please disregard my previous email.",
+  "zh": "请忽略我之前的邮件。"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "For your action / For your information",
+  "zh": "请处理 / 供参考"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Loop in the consultant.",
+  "zh": "把顾问也抄送进来。"
+ },
+ {
+  "week": 18,
+  "topic": "邮件与商务书写",
+  "en": "Revert to me once confirmed.",
+  "zh": "确认后请回复我。"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "proposal",
+  "zh": "提案"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "counter-proposal",
+  "zh": "反提案"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "negotiate",
+  "zh": "谈判"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "compromise",
+  "zh": "折中"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "concession",
+  "zh": "让步"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "commitment",
+  "zh": "承诺"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "liability",
+  "zh": "责任"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "dispute",
+  "zh": "争议"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "resolution",
+  "zh": "解决方案"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "mutually agreed",
+  "zh": "双方同意的"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "subject to approval",
+  "zh": "以批准为准"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "without prejudice",
+  "zh": "不影响各自权利"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "in good faith",
+  "zh": "本着善意"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "reach a consensus",
+  "zh": "达成共识"
+ },
+ {
+  "week": 19,
+  "topic": "谈判与争议处理",
+  "en": "bear the cost",
+  "zh": "承担费用"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "presentation",
+  "zh": "演示汇报"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "overview",
+  "zh": "概述"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "highlight",
+  "zh": "重点"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "key takeaway",
+  "zh": "关键结论"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "next steps",
+  "zh": "下一步"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "recommendation",
+  "zh": "建议"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "rationale",
+  "zh": "理由 / 依据"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "trade-off",
+  "zh": "权衡取舍"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "feasibility",
+  "zh": "可行性"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "assumption",
+  "zh": "假设"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "constraint",
+  "zh": "约束条件"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "value proposition",
+  "zh": "价值主张"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "in a nutshell",
+  "zh": "简而言之"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "to summarize",
+  "zh": "总结一下"
+ },
+ {
+  "week": 20,
+  "topic": "汇报与演示",
+  "en": "I'll walk you through...",
+  "zh": "我带大家过一遍……"
+ }
+]
