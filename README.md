@@ -1,4 +1,4 @@
-# 每日英语推送（方案一：PushPlus + GitHub Actions + Claude API）
+# 每日英语推送（方案一：PushPlus + GitHub Actions + DeepSeek API）
 
 对应《人生计划书（2026-2030）》C.4.2。本仓库已经把脚本、词库、定时任务都准备好了，
 你只需要照着下面的步骤走一遍，全程约 60 分钟，之后每天早上 7:00 微信自动收到学习卡片。
@@ -11,7 +11,7 @@
 |---|---|
 | 微信 | 用来扫码登录 PushPlus、接收推送 |
 | 邮箱 | 注册 GitHub、Anthropic 各一个（可同一个） |
-| 一张能付美元的卡 | Anthropic 充值 5 美元，够用一年多。Visa/Master 信用卡或双币卡 |
+| AI API | DeepSeek（已有余额，无需充值）或 Anthropic Claude（需外币卡充 5 美元） |
 | 电脑 | Windows 即可，本机已装好 Python 3.12 和 Git |
 
 本目录已包含：
